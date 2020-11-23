@@ -4,30 +4,15 @@ const server = express();
 const hostname = '0.0.0.0';
 const port = 3000;
 
-server.get('/', (req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World !');
-})
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://mongo/apinodejs')
+// moongoose.connect('mongodb://localhost:27017/apinodejs');  // Without docker
 
-server.get('/posts', (req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Voici les articles !');
-})
+const bodyParser = require('body-parser');
+server.use(bodyParser.urlencoded());
+server.use(bodyParser.json());
 
-server.get('/posts/:id', (req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  let postId = req.params.id;
-  res.end(`Voici l'article : ${postId}`);
-})
-
-server.post('/posts', (req, res) => {
-  res.statusCode = 201;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Article crée !');
-})
-
+const postRoute = require('./api/routes/postRoute');
+postRoute(server);
 
 server.listen(port, hostname);
