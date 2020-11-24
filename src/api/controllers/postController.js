@@ -17,6 +17,11 @@ exports.list_all_posts = (req, res) => {
 
 exports.create_a_post = (req, res) => {
     let new_post = new Post(req.body);
+    
+    const axios = require('axios');
+    axios.get('https://loripsum.net/api/plaintext').then(resp => {
+    console.log(resp.data);
+    });
 
     new_post.save((error, post) => {
         if (error) {
