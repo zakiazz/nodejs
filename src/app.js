@@ -2,6 +2,7 @@ const express = require('express')
 const server = express();
 
 const hostname = '0.0.0.0';
+// Localhost
 const port = 3000;
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://mongo/apinodejs')
